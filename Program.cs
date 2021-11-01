@@ -1,5 +1,6 @@
 ﻿using System;
 using Xadrez.pecas_xadrez;
+using Xadrez.pecas_xadrez.partida;
 using Xadrez.tabuleiro;
 using Xadrez.tabuleiro.exceptions;
 
@@ -11,12 +12,28 @@ namespace Xadrez
         {
             try
             {
-                Tabuleiro tabuleiro = new Tabuleiro(8, 8);
-                tabuleiro.ColocarPecas(new Torre(Cor.Amarela, tabuleiro), new Posicao(0, 0));
-                tabuleiro.ColocarPecas(new Torre(Cor.Verde, tabuleiro), new Posicao(1, 3));
-                tabuleiro.ColocarPecas(new Rei(Cor.Azul, tabuleiro), new Posicao(0, 2));
-                TelaTabuleiro.ImprimirTabuleiro(tabuleiro);
-            }catch(TabuleiroException e)
+                PartidaDeXadrez partida = new PartidaDeXadrez();
+
+                while(!partida.Finalizada)
+                {
+                    Console.Clear();
+                    TelaTabuleiro.ImprimirTabuleiro(partida.tabuleiro);
+
+                    Console.WriteLine();
+                    Console.WriteLine();
+
+                    Console.Write("Origem");
+                    Posicao origem = TelaTabuleiro.LerPosicaoXadrez().ToPosicao();
+
+                    Console.Write("Destino");
+                    Posicao destino = TelaTabuleiro.LerPosicaoXadrez().ToPosicao();
+
+                    partida.ExecutaMovimento(origem, destino);
+                }
+
+
+            }
+            catch(TabuleiroException e)
             {
                 Console.WriteLine(e.Message);
             }
