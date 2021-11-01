@@ -1,4 +1,6 @@
-﻿namespace Xadrez.tabuleiro
+﻿using Xadrez.tabuleiro.exceptions;
+
+namespace Xadrez.tabuleiro
 {
     class Tabuleiro
     {
@@ -24,11 +26,39 @@
             return pecas[pos.Linha, pos.Coluna];
         }
 
+        public bool ExistePeca(Posicao pos)
+        {
+            validarAPosicao(pos);
+            return peca(pos) != null;
+        }
+
         public void ColocarPecas(Peca p, Posicao pos)
         {
-            pecas[pos.Linha, pos.Coluna] = p;
+            if (ExistePeca(pos))
+            {
+                throw new TabuleiroException("Já existe uma peça nessa posição");
+            }
 
+            pecas[pos.Linha, pos.Coluna] = p;
             p.posicao = pos;
+        }
+
+        public bool PosicaoValida(Posicao pos)
+        {
+            if(pos.Linha < 0 || pos.Linha >= linhas || pos.Coluna < 0 || pos.Coluna >= colunas)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public void validarAPosicao(Posicao pos)
+        {
+            if(!PosicaoValida(pos))
+            {
+                throw new TabuleiroException("Posição Inválida!!");
+            }
         }
     }
 }
