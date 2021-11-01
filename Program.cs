@@ -22,10 +22,10 @@ namespace Xadrez
                     Console.WriteLine();
                     Console.WriteLine();
 
-                    Console.Write("Origem");
+                    Console.Write("Origem: ");
                     Posicao origem = TelaTabuleiro.LerPosicaoXadrez().ToPosicao();
 
-                    Console.Write("Destino");
+                    Console.Write("Destino: ");
                     Posicao destino = TelaTabuleiro.LerPosicaoXadrez().ToPosicao();
 
                     partida.ExecutaMovimento(origem, destino);

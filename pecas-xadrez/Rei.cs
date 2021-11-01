@@ -13,5 +13,18 @@ namespace Xadrez.pecas_xadrez
         {
             return "R";
         }
+
+        private bool PodeMover(Posicao pos)
+        {
+            Peca p = tabuleiro.peca(pos);
+
+            return p == null || p.cor != this.cor;
+        }
+
+        public override bool[,] MovimentosPossiveis()
+        {
+            bool[,] matriz = new bool[tabuleiro.linhas, tabuleiro.colunas];
+        }
+
     }
 }
