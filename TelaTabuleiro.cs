@@ -13,7 +13,7 @@ namespace Xadrez
                 {
                     if(tabuleiro.peca(i, j) == null)
                     {
-                        Console.Write(" -  ");
+                        Console.Write("- ");
                     }else
                     {
                         Console.Write(tabuleiro.peca(i, j) + " ");
