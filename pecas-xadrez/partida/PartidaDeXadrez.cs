@@ -108,7 +108,7 @@ namespace Xadrez.pecas_xadrez.partida
 
         public void ValidarPosicaoDeDestino(Posicao origem, Posicao destino)
         {
-            if(!tabuleiro.peca(origem).PodeMoverPara(destino))
+            if(!tabuleiro.peca(origem).MovimentoPossivel(destino))
             {
                 throw new TabuleiroException("Posição de destino inválida!");
             }
@@ -219,11 +219,13 @@ namespace Xadrez.pecas_xadrez.partida
                     {
                         if(matriz[i, j])
                         {
+
+                            Posicao origem = x.posicao;
                             Posicao destino = new Posicao(i, j);
-                            Peca pecaCapturada = ExecutaMovimento(x.posicao, destino);
+                            Peca pecaCapturada = ExecutaMovimento(origem, destino);
                             bool TesteXeque = EstaEmXeque(cor);
 
-                            DesfazMovimento(x.posicao, destino, pecaCapturada);
+                            DesfazMovimento(origem, destino, pecaCapturada);
 
                             if(!TesteXeque)
                             {
