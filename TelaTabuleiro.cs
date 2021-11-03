@@ -78,20 +78,6 @@ namespace Xadrez
                     Console.Write(peca);
                     Console.ForegroundColor = aux;
                 }
-                else if (peca.cor == Cor.Azul)
-                {
-                    ConsoleColor aux = Console.ForegroundColor;
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.Write(peca);
-                    Console.ForegroundColor = aux;
-                }
-                else if (peca.cor == Cor.Verde)
-                {
-                    ConsoleColor aux = Console.ForegroundColor;
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.Write(peca);
-                    Console.ForegroundColor = aux;
-                }
                 Console.Write(" ");
             }
         }
