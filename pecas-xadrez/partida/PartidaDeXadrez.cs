@@ -248,13 +248,41 @@ namespace Xadrez.pecas_xadrez.partida
 
         private void ColocarPecas()
         {
+            //Peças brancas
             ColocarNovaPeca('a', 1, new Torre(Cor.Branco, tabuleiro));
+            ColocarNovaPeca('b', 1, new Cavalo(Cor.Branco, tabuleiro));
+            ColocarNovaPeca('c', 1, new Bispo(Cor.Branco, tabuleiro));
+            ColocarNovaPeca('d', 1, new Dama(Cor.Branco, tabuleiro));
+            ColocarNovaPeca('e', 1, new Rei(Cor.Branco, tabuleiro));
+            ColocarNovaPeca('f', 1, new Bispo(Cor.Branco, tabuleiro));
+            ColocarNovaPeca('g', 1, new Cavalo(Cor.Branco, tabuleiro));
             ColocarNovaPeca('h', 1, new Torre(Cor.Branco, tabuleiro));
-            ColocarNovaPeca('d', 1, new Rei(Cor.Branco, tabuleiro));
+            ColocarNovaPeca('a', 2, new Peao(Cor.Branco, tabuleiro));
+            ColocarNovaPeca('b', 2, new Peao(Cor.Branco, tabuleiro));
+            ColocarNovaPeca('c', 2, new Peao(Cor.Branco, tabuleiro));
+            ColocarNovaPeca('d', 2, new Peao(Cor.Branco, tabuleiro));
+            ColocarNovaPeca('e', 2, new Peao(Cor.Branco, tabuleiro));
+            ColocarNovaPeca('f', 2, new Peao(Cor.Branco, tabuleiro));
+            ColocarNovaPeca('g', 2, new Peao(Cor.Branco, tabuleiro));
+            ColocarNovaPeca('h', 2, new Peao(Cor.Branco, tabuleiro));
 
+            //Peças amarelas
             ColocarNovaPeca('a', 8, new Torre(Cor.Amarela, tabuleiro));
+            ColocarNovaPeca('b', 8, new Cavalo(Cor.Amarela, tabuleiro));
+            ColocarNovaPeca('c', 8, new Bispo(Cor.Amarela, tabuleiro));
+            ColocarNovaPeca('d', 8, new Rei(Cor.Amarela, tabuleiro));
+            ColocarNovaPeca('e', 8, new Dama(Cor.Amarela, tabuleiro));
+            ColocarNovaPeca('f', 8, new Bispo(Cor.Amarela, tabuleiro));
+            ColocarNovaPeca('g', 8, new Cavalo(Cor.Amarela, tabuleiro));
             ColocarNovaPeca('h', 8, new Torre(Cor.Amarela, tabuleiro));
-            ColocarNovaPeca('e', 8, new Rei(Cor.Amarela, tabuleiro));
+            ColocarNovaPeca('a', 7, new Peao(Cor.Amarela, tabuleiro));
+            ColocarNovaPeca('b', 7, new Peao(Cor.Amarela, tabuleiro));
+            ColocarNovaPeca('c', 7, new Peao(Cor.Amarela, tabuleiro));
+            ColocarNovaPeca('d', 7, new Peao(Cor.Amarela, tabuleiro));
+            ColocarNovaPeca('e', 7, new Peao(Cor.Amarela, tabuleiro));
+            ColocarNovaPeca('f', 7, new Peao(Cor.Amarela, tabuleiro));
+            ColocarNovaPeca('g', 7, new Peao(Cor.Amarela, tabuleiro));
+            ColocarNovaPeca('h', 7, new Peao(Cor.Amarela, tabuleiro));
 
 
         }
