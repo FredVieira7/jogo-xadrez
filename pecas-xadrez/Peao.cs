@@ -73,14 +73,14 @@ namespace Xadrez.pecas_xadrez
 
                     if(tabuleiro.PosicaoValida(esquerda) && ExisteInimigo(esquerda) && tabuleiro.peca(esquerda) == Partida.VulneravelEnPassant)
                     {
-                        matriz[esquerda.Linha, esquerda.Coluna] = true;
+                        matriz[esquerda.Linha - 1, esquerda.Coluna] = true;
                     }
 
                     Posicao direita = new Posicao(posicao.Linha, posicao.Coluna + 1);
 
                     if (tabuleiro.PosicaoValida(direita) && ExisteInimigo(direita) && tabuleiro.peca(direita) == Partida.VulneravelEnPassant)
                     {
-                        matriz[direita.Linha, direita.Coluna] = true;
+                        matriz[direita.Linha - 1, direita.Coluna] = true;
                     }
                 }
 
@@ -117,14 +117,14 @@ namespace Xadrez.pecas_xadrez
 
                     if (tabuleiro.PosicaoValida(esquerda) && ExisteInimigo(esquerda) && tabuleiro.peca(esquerda) == Partida.VulneravelEnPassant)
                     {
-                        matriz[esquerda.Linha, esquerda.Coluna] = true;
+                        matriz[esquerda.Linha + 1, esquerda.Coluna] = true;
                     }
 
                     Posicao direita = new Posicao(posicao.Linha, posicao.Coluna + 1);
 
                     if (tabuleiro.PosicaoValida(direita) && ExisteInimigo(direita) && tabuleiro.peca(direita) == Partida.VulneravelEnPassant)
                     {
-                        matriz[direita.Linha, direita.Coluna] = true;
+                        matriz[direita.Linha + 1, direita.Coluna] = true;
                     }
                 }
             }
