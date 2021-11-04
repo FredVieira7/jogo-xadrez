@@ -14,6 +14,7 @@ namespace Xadrez.pecas_xadrez.partida
         private HashSet<Peca> Pecas;
         private HashSet<Peca> Capturadas;
         public bool Xeque { get; private set; }
+        public Peca VulneravelEnPassant { get; private set; }
 
         public PartidaDeXadrez()
         {
@@ -22,6 +23,7 @@ namespace Xadrez.pecas_xadrez.partida
             JogadorAtual = Cor.Branco;
             Finalizada = false;
             Xeque = false;
+            VulneravelEnPassant = null;
             Pecas = new HashSet<Peca>();
             Capturadas = new HashSet<Peca>();
             ColocarPecas();
@@ -63,6 +65,25 @@ namespace Xadrez.pecas_xadrez.partida
                 tabuleiro.ColocarPeca(T, destinoTorre);
             }
 
+            //Jogada especial: En Passant
+            if(p is Peao)
+            {
+                if(origem.Coluna != destino.Coluna && pecaCapturada == null)
+                {
+                    Posicao posPeao;
+                    if(p.cor == Cor.Branco)
+                    {
+                        posPeao = new Posicao(destino.Linha + 1, destino.Coluna);
+                    }else
+                    {
+                        posPeao = new Posicao(destino.Linha - 1, destino.Coluna);
+                    }
+
+                    pecaCapturada = tabuleiro.RetirarPeca(posPeao);
+                    Capturadas.Add(pecaCapturada);
+                }
+            }
+
             return pecaCapturada;
 
         }
@@ -101,6 +122,25 @@ namespace Xadrez.pecas_xadrez.partida
                 T.IncrementarQtdMovimentos();
                 tabuleiro.ColocarPeca(T, origemTorre);
             }
+
+            //Jogada especial: En Passant
+            if(p is Peao)
+            {
+                if(origem.Coluna != destino.Coluna && pecaCapturada == VulneravelEnPassant)
+                {
+                    Peca peao = tabuleiro.RetirarPeca(destino);
+                    Posicao posPeao;
+
+                    if(p.cor == Cor.Branco)
+                    {
+                        posPeao = new Posicao(3, destino.Coluna);
+                    }else
+                    {
+                        posPeao = new Posicao(4, destino.Coluna);
+                    }
+                    tabuleiro.ColocarPeca(peao, posPeao);
+                }
+            }
         }
 
         public void RealizaJogada(Posicao origem, Posicao destino)
@@ -128,6 +168,17 @@ namespace Xadrez.pecas_xadrez.partida
             {
                 Turno++;
                 MudaJogador();
+            }
+
+            Peca p = tabuleiro.peca(destino);
+
+            //Jogada especial: En Passant
+            if(p is Peao && (destino.Linha == origem.Linha - 2 || destino.Linha == origem.Linha + 2))
+            {
+                VulneravelEnPassant = p;
+            }else
+            {
+                VulneravelEnPassant = null;
             }
 
             
@@ -298,7 +349,7 @@ namespace Xadrez.pecas_xadrez.partida
             ColocarNovaPeca('b', 1, new Cavalo(Cor.Branco, tabuleiro));
             ColocarNovaPeca('c', 1, new Bispo(Cor.Branco, tabuleiro));
             ColocarNovaPeca('d', 1, new Dama(Cor.Branco, tabuleiro));
-            ColocarNovaPeca('e', 1, new Rei(Cor.Branco, tabuleiro));
+            ColocarNovaPeca('e', 1, new Rei(Cor.Branco, tabuleiro, this));
             ColocarNovaPeca('f', 1, new Bispo(Cor.Branco, tabuleiro));
             ColocarNovaPeca('g', 1, new Cavalo(Cor.Branco, tabuleiro));
             ColocarNovaPeca('h', 1, new Torre(Cor.Branco, tabuleiro));
@@ -315,7 +366,7 @@ namespace Xadrez.pecas_xadrez.partida
             ColocarNovaPeca('a', 8, new Torre(Cor.Amarela, tabuleiro));
             ColocarNovaPeca('b', 8, new Cavalo(Cor.Amarela, tabuleiro));
             ColocarNovaPeca('c', 8, new Bispo(Cor.Amarela, tabuleiro));
-            ColocarNovaPeca('d', 8, new Rei(Cor.Amarela, tabuleiro));
+            ColocarNovaPeca('d', 8, new Rei(Cor.Amarela, tabuleiro, this));
             ColocarNovaPeca('e', 8, new Dama(Cor.Amarela, tabuleiro));
             ColocarNovaPeca('f', 8, new Bispo(Cor.Amarela, tabuleiro));
             ColocarNovaPeca('g', 8, new Cavalo(Cor.Amarela, tabuleiro));

@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xadrez.pecas_xadrez.partida;
 using Xadrez.tabuleiro;
 
 namespace Xadrez.pecas_xadrez
 {
     class Peao : Peca
     {
-        public Peao(Cor cor, Tabuleiro tabuleiro) : base(cor, tabuleiro)
-        {
 
+        private PartidaDeXadrez Partida;
+        public Peao(Cor cor, Tabuleiro tabuleiro, PartidaDeXadrez partida) : base(cor, tabuleiro)
+        {
+            Partida = partida;
         }
 
         public override string ToString()
@@ -63,6 +66,24 @@ namespace Xadrez.pecas_xadrez
                     matriz[pos.Linha, pos.Coluna] = true;
                 }
 
+                //Jogada especial: En Passant
+                if(posicao.Linha == 3)
+                {
+                    Posicao esquerda = new Posicao(posicao.Linha, posicao.Coluna - 1);
+
+                    if(tabuleiro.PosicaoValida(esquerda) && ExisteInimigo(esquerda) && tabuleiro.peca(esquerda) == Partida.VulneravelEnPassant)
+                    {
+                        matriz[esquerda.Linha, esquerda.Coluna] = true;
+                    }
+
+                    Posicao direita = new Posicao(posicao.Linha, posicao.Coluna + 1);
+
+                    if (tabuleiro.PosicaoValida(direita) && ExisteInimigo(direita) && tabuleiro.peca(direita) == Partida.VulneravelEnPassant)
+                    {
+                        matriz[direita.Linha, direita.Coluna] = true;
+                    }
+                }
+
             }else
             {
                 pos.DefinirValores(posicao.Linha + 1, posicao.Coluna);
@@ -87,6 +108,24 @@ namespace Xadrez.pecas_xadrez
                 if (tabuleiro.PosicaoValida(pos) && ExisteInimigo(pos))
                 {
                     matriz[pos.Linha, pos.Coluna] = true;
+                }
+
+                //Jogada especial: En Passant
+                if (posicao.Linha == 4)
+                {
+                    Posicao esquerda = new Posicao(posicao.Linha, posicao.Coluna - 1);
+
+                    if (tabuleiro.PosicaoValida(esquerda) && ExisteInimigo(esquerda) && tabuleiro.peca(esquerda) == Partida.VulneravelEnPassant)
+                    {
+                        matriz[esquerda.Linha, esquerda.Coluna] = true;
+                    }
+
+                    Posicao direita = new Posicao(posicao.Linha, posicao.Coluna + 1);
+
+                    if (tabuleiro.PosicaoValida(direita) && ExisteInimigo(direita) && tabuleiro.peca(direita) == Partida.VulneravelEnPassant)
+                    {
+                        matriz[direita.Linha, direita.Coluna] = true;
+                    }
                 }
             }
 
